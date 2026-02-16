@@ -1,4 +1,4 @@
-# 🍔 Food Ecommerce API – Laravel Backend System
+# 🍔 Food Strong Ecommerce API – Laravel Backend System
 
 ## 🚀 Project Overview
 **Food Ecommerce API** is a **Back-End only** application built with **Laravel** that powers a complete food ordering platform similar to Uber Eats or Talabat.
