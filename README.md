@@ -1,6 +1,6 @@
 # 🍔 Food Strong – Ecommerce API (Laravel Backend System)
 
-![Project Preview](https://res.cloudinary.com/dgagbheuj/image/upload/v1774495924/qimodtcb83kflszta2zc.png)
+![Project Preview](https://res.cloudinary.com/dgagbheuj/image/upload/v1776327537/gegnrdkkgcb6c1lej4ym.png)
 
 A **scalable backend-only ecommerce API** built with Laravel that powers a full food ordering platform similar to Uber Eats / Talabat.
 
