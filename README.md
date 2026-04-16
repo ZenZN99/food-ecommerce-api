@@ -1,264 +1,260 @@
-# 🍔 Food Strong Ecommerce API – Laravel Backend System
+# 🍔 Food Strong – Ecommerce API (Laravel Backend System)
 
-## 🚀 Project Overview
-**Food Ecommerce API** is a **Back-End only** application built with **Laravel** that powers a complete food ordering platform similar to Uber Eats or Talabat.
+![Project Preview](https://res.cloudinary.com/dgagbheuj/image/upload/v1774495924/qimodtcb83kflszta2zc.png)
 
-The system supports:
-- Multi-restaurant architecture
-- Role-based access control
-- Cart & checkout flow
-- Fake payment simulation
-- Wallet & transaction balance system
+A **scalable backend-only ecommerce API** built with Laravel that powers a full food ordering platform similar to Uber Eats / Talabat.
 
-This API is designed to be:
-- ⚡ Fast & scalable
-- 🔐 Secure
-- 🧠 Clean & maintainable
-- 🔌 Frontend-agnostic (React / Next.js / Angular / Mobile Apps)
-- 🧪 Fully testable using Postman
+This system is designed with **clean architecture principles**, role-based access control, and production-ready structure for real-world applications.
 
 ---
 
-## 🏗 System Architecture
-- RESTful API
-- Laravel Sanctum Authentication
-- Role & Permission Middleware
-- PostgreSQL Database
-- Clear separation of concerns (Models, Requests, Controllers)
+## 🧠 Overview
+
+Food Strong API is a **multi-restaurant backend system** where users can:
+
+- Browse restaurants and products
+- Add items to cart
+- Place orders and simulate payments
+- Manage wallet balance and transactions
+- Track delivery status in real-time flow
+
+It is fully **frontend-agnostic** and can be integrated with:
+React, Next.js, Angular, or Mobile apps.
 
 ---
 
-## 👤 Authentication & Users
-- User registration & login
-- Token-based authentication (Laravel Sanctum)
-- Get authenticated user profile
-- Admin user management
-- Role assignment & update
+## ⚙️ Tech Stack
 
-### User Roles
-- `Customer`
-- `Admin`
-- `Restaurant Owner`
-- `Delivery`
+- **Backend Framework:** Laravel
+- **Authentication:** Laravel Sanctum
+- **Database:** PostgreSQL
+- **Architecture:** RESTful API
+- **Security:** Middleware + Role-based access control
+- **Testing:** Postman
 
 ---
 
-## 🏪 Restaurants
-- Create restaurant (Restaurant Owner)
-- Update restaurant
-- Delete restaurant
+## 🔐 Authentication & Roles
+
+The system supports **role-based access control (RBAC)**:
+
+- `CUSTOMER`
+- `ADMIN`
+- `RESTAURANT_OWNER`
+- `DELIVERY`
+
+### Features
+
+- Secure registration & login
+- Token-based authentication (Sanctum)
+- Profile management
+- Role-based route protection
+- Admin user control
+
+---
+
+## 🏪 Restaurant System
+
+- Create / Update / Delete restaurant (Owner)
 - View all restaurants
-- View single restaurant with details
+- View restaurant details
+- Multi-restaurant support
 
 ---
 
-## 🗂 Categories
-- Create category per restaurant
-- Update category
-- Delete category
-- Get restaurant categories
+## 🍽 Product System
+
+- Create / Update / Delete products
+- Assign products to restaurants
+- View products per restaurant
+- Product details page
 
 ---
 
-## 🍽 Products
-- Create product
-- Update product
-- Delete product
-- Get products by restaurant
-- Get single product details
+## 🗂 Categories System
 
----
-
-## ➕ Product Options
-- Create product options (extras, sizes, add-ons)
-- Update product options
-- Delete product options
-- Attach options to cart items & orders
+- Create categories per restaurant
+- Manage categories (CRUD)
+- Filter products by category
 
 ---
 
 ## 🛒 Cart System
+
 - One cart per restaurant per user
-- Create cart
-- View cart by restaurant
-- Delete cart
-- Add items to cart
-- Update cart item quantity
-- Remove cart items
-
-### Cart Item Options
-- Add options to cart item
-- Remove options from cart item
+- Add / update / remove items
+- Manage item quantities
+- Attach product options (extras, sizes)
 
 ---
 
-## 📦 Orders
+## 📦 Order System
+
 - Create order from cart
-- Convert cart items into order items
-- Get all orders (Admin / Customer)
-- Get single order details
-- Update order (Admin)
-- Delete order (Admin)
+- Convert cart → order items
+- View order history
+- Admin order management
+- Delivery status tracking
 
----
+### Order Status Flow
 
-## 📑 Order Items
-- Create order items
-- Update order item
-- Delete order item
-- Attach options to order items
+- `PENDING`
+- `PREPARING`
+- `ON_THE_WAY`
+- `DELIVERED`
+- `CANCELLED`
 
 ---
 
 ## 💳 Payment System (Fake Payment)
-- Simulated payment process
-- Payment linked to order
-- Prevent payment if balance is insufficient
-- Store payment history
-- Clear cart after successful payment
+
+- Simulated payment processing
+- Payment linked to orders
+- Wallet balance validation
+- Cart auto-clear after successful payment
+- Payment history tracking
 
 ---
 
 ## 💰 Wallet & Transactions
-- User wallet balance
-- Recharge wallet (Fake transaction)
-- Store transaction history
-- Track:
+
+- User wallet system
+- Recharge wallet (fake transactions)
+- Track transaction history
+- Store:
   - Amount
   - Type (recharge / payment)
-  - Balance before & after
+  - Balance before / after
   - Description
 
 ---
 
-## 🏠 Addresses
-- Create address
-- Update address
-- Delete address
-- List user addresses
-- Use address during order creation
+## 🏠 Address System
+
+- Add / update / delete addresses
+- Multiple addresses per user
+- Select address during checkout
 
 ---
 
-## 🚚 Delivery
-- Delivery role can update order status
-- Status flow:
-  - pending
-  - preparing
-  - on_the_way
-  - delivered
-  - cancelled
+## 🚚 Delivery System
+
+- Delivery role updates order status
+- Real-time delivery lifecycle:
+  - Preparing → On the way → Delivered
 
 ---
 
 ## 🛡 Role-Based Access Control
 
 | Role              | Permissions |
-|-------------------|------------|
-| Customer          | Cart, Orders, Payments, Transactions |
-| Restaurant Owner  | Restaurants, Categories, Products |
-| Delivery          | Update order status |
-| Admin             | Full system control |
-
-Authorization handled using:
-- Laravel Sanctum
-- Role Middleware
-- Route-level protection
+|------------------|-------------|
+| CUSTOMER         | Cart, Orders, Payments, Wallet |
+| RESTAURANT_OWNER | Manage restaurants, products, categories |
+| DELIVERY         | Update order status |
+| ADMIN            | Full system control |
 
 ---
 
-## 🔗 API Routes Overview
+## 🔗 API Structure
 
-### Auth
-- `POST /auth/register`
-- `POST /auth/login`
-- `GET  /me`
+```bash id="lf3k9a"
+POST   /auth/register
+POST   /auth/login
+GET    /me
 
----
+POST   /cart/create
+GET    /cart/{restaurant}
+DELETE /cart/delete/{restaurant}
 
-### Cart
-- `POST   /cart/create`
-- `GET    /cart/{restaurant}`
-- `DELETE /cart/delete/{restaurant}`
+POST   /order/create
+GET    /orders
+GET    /order/{id}
 
----
+POST   /payment
+GET    /payment
 
-### Orders
-- `POST /order/create`
-- `GET  /orders`
-- `GET  /order/{order}`
-
----
-
-### Payment
-- `POST /payment`
-- `GET  /payment`
-
----
-
-### Transactions
-- `POST /transaction/recharge`
-- `GET  /transactions`
-
----
+POST   /transaction/recharge
+GET    /transactions
+```
 
 ## ⚙️ Installation & Setup
-
 ### Requirements
 - PHP 8+
 - Composer
 - PostgreSQL
-- Git
-
+- Laravel CLI
 ---
-
-### Installation Steps
-
+### 1. Clone Repository
 ```bash
 git clone https://github.com/ZenZN99/food-ecommerce-api
 cd food-ecommerce-api
-bash
-Copy code
+```
+---
+### 2. Install Dependencies
+```bash
 composer install
-bash
-Copy code
+```
+---
+### 3. Setup Environment
+```bash
 cp .env.example .env
 php artisan key:generate
-Configure your database in .env
-
-bash
-Copy code
+```
+---
+### 4. Run Migrations
+```bash
 php artisan migrate
+```
+---
+### 5. Run Server
+```bash
 php artisan serve
-Server will run at:
+```
+---
+## 🧪 Testing
+This project was tested using Postman to ensure full API reliability.
 
-cpp
-Copy code
-http://127.0.0.1:8000
-🧪 Testing
-Fully testable using Postman
+## 🔹 Tools Used
+- Postman (API testing)
+- PostgreSQL (Database verification)
+- Laravel Logs (Debugging)
 
-Token-based authorization
+## 🔹 Tested Modules
+- Authentication system (Sanctum)
+- Restaurant management
+- Product & category system
+- Cart operations
+- Order lifecycle
+- Wallet & payment simulation
+- Delivery status flow
 
-Clean and predictable API responses
+## 🔹 Notes
+- All endpoints tested with Bearer Token authentication
+- Edge cases handled (invalid cart, empty orders, insufficient balance)
+- API responses are consistent and structured
+---
+## 🚀 Future Improvements
+- 💳 Real payment gateway integration (Stripe / PayPal)
+- 📊 Admin analytics dashboard
+- ⭐ Rating & review system
+- 🔔 Order notifications system
+- 🎟 Coupons & discount system
+- 📦 Advanced delivery tracking (real-time GPS)
+---
 
-🔮 Future Enhancements
-Real payment gateway integration
+## 📌 Notes
+- Built with scalable Laravel architecture
+- Fully RESTful API design
+- Clean separation of concerns
+- Ready for frontend/mobile integration
+- Production-ready backend system
 
-Order notifications
-
-Restaurant analytics dashboard
-
-Rating & reviews system
-
-Coupons & promotions
-
-API documentation (Swagger / OpenAPI)
-
-👨‍💻 Author
+## 👨‍💻 Author
 Zen Allaham
 Backend / Full-Stack Developer
-Laravel • Node.js • NestJS • PostgreSQL
+Laravel • NestJS • Node.js • PostgreSQL
 
 📜 License
+
 MIT License © 2026 Zen Allaham
